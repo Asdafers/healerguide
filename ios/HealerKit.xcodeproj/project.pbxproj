@@ -30,63 +30,63 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1A001022 /* PBXContainerItemProxy */ = {
+		1AFFP001 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001014;
 			remoteInfo = DungeonKit;
 		};
-		1A001032 /* PBXContainerItemProxy */ = {
+		1AFFP002 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001024;
 			remoteInfo = AbilityKit;
 		};
-		1A001042 /* PBXContainerItemProxy */ = {
+		1AFFP003 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001034;
 			remoteInfo = HealerUIKit;
 		};
-		1A001052 /* PBXContainerItemProxy */ = {
+		1AFFP004 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A000FFB;
 			remoteInfo = HealerKit;
 		};
-		1A001062 /* PBXContainerItemProxy */ = {
+		1AFFP005 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001014;
 			remoteInfo = DungeonKit;
 		};
-		1A001072 /* PBXContainerItemProxy */ = {
+		1AFFP006 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001024;
 			remoteInfo = AbilityKit;
 		};
-		1A001082 /* PBXContainerItemProxy */ = {
+		1AFFP007 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001034;
 			remoteInfo = HealerUIKit;
 		};
-		1A001092 /* PBXContainerItemProxy */ = {
+		1AFFP008 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001014;
 			remoteInfo = DungeonKit;
 		};
-		1A001095 /* PBXContainerItemProxy */ = {
+		1AFFP009 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
@@ -117,7 +117,7 @@
 		1A001006 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A001008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A00100B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		1A00100D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A0099AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A00100E /* HealerKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealerKit.xcdatamodel; sourceTree = "<group>"; };
 		1A001015 /* DungeonKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DungeonKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A001017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 				1A001005 /* Main.storyboard */,
 				1A001008 /* Assets.xcassets */,
 				1A00100A /* LaunchScreen.storyboard */,
-				1A00100D /* Info.plist */,
+				1A0099AA /* Info.plist */,
 				1A00100D /* HealerKit.xcdatamodeld */,
 			);
 			path = HealerKit;
@@ -354,7 +354,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1A001043 /* PBXTargetDependency */,
+				1AFFD003 /* PBXTargetDependency */,
 			);
 			name = HealerKit;
 			productName = HealerKit;
@@ -391,7 +391,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1A001091 /* PBXTargetDependency */,
+				1AFFD008 /* PBXTargetDependency */,
 			);
 			name = AbilityKit;
 			productName = AbilityKit;
@@ -410,7 +410,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1A001094 /* PBXTargetDependency */,
+				1AFFD009 /* PBXTargetDependency */,
 			);
 			name = HealerUIKit;
 			productName = HealerUIKit;
@@ -428,7 +428,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1A001053 /* PBXTargetDependency */,
+				1AFFD004 /* PBXTargetDependency */,
 			);
 			name = HealerKitTests;
 			productName = HealerKitTests;
@@ -446,7 +446,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1A001063 /* PBXTargetDependency */,
+				1AFFD005 /* PBXTargetDependency */,
 			);
 			name = DungeonKitTests;
 			productName = DungeonKitTests;
@@ -464,7 +464,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1A001073 /* PBXTargetDependency */,
+				1AFFD006 /* PBXTargetDependency */,
 			);
 			name = AbilityKitTests;
 			productName = AbilityKitTests;
@@ -482,7 +482,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1A001083 /* PBXTargetDependency */,
+				1AFFD007 /* PBXTargetDependency */,
 			);
 			name = HealerUIKitTests;
 			productName = HealerUIKitTests;
@@ -688,50 +688,50 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1A001023 /* PBXTargetDependency */ = {
+		1AFFD001 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A001014 /* DungeonKit */;
-			targetProxy = 1A001022 /* PBXContainerItemProxy */;
+			targetProxy = 1AFFP001 /* PBXContainerItemProxy */;
 		};
-		1A001033 /* PBXTargetDependency */ = {
+		1AFFD002 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A001024 /* AbilityKit */;
-			targetProxy = 1A001032 /* PBXContainerItemProxy */;
+			targetProxy = 1AFFP002 /* PBXContainerItemProxy */;
 		};
-		1A001043 /* PBXTargetDependency */ = {
+		1AFFD003 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A001034 /* HealerUIKit */;
-			targetProxy = 1A001042 /* PBXContainerItemProxy */;
+			targetProxy = 1AFFP003 /* PBXContainerItemProxy */;
 		};
-		1A001053 /* PBXTargetDependency */ = {
+		1AFFD004 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A000FFB /* HealerKit */;
-			targetProxy = 1A001052 /* PBXContainerItemProxy */;
+			targetProxy = 1AFFP004 /* PBXContainerItemProxy */;
 		};
-		1A001063 /* PBXTargetDependency */ = {
+		1AFFD005 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A001014 /* DungeonKit */;
-			targetProxy = 1A001062 /* PBXContainerItemProxy */;
+			targetProxy = 1AFFP005 /* PBXContainerItemProxy */;
 		};
-		1A001073 /* PBXTargetDependency */ = {
+		1AFFD006 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A001024 /* AbilityKit */;
-			targetProxy = 1A001072 /* PBXContainerItemProxy */;
+			targetProxy = 1AFFP006 /* PBXContainerItemProxy */;
 		};
-		1A001083 /* PBXTargetDependency */ = {
+		1AFFD007 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A001034 /* HealerUIKit */;
-			targetProxy = 1A001082 /* PBXContainerItemProxy */;
+			targetProxy = 1AFFP007 /* PBXContainerItemProxy */;
 		};
-		1A001091 /* PBXTargetDependency */ = {
+		1AFFD008 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A001014 /* DungeonKit */;
-			targetProxy = 1A001092 /* PBXContainerItemProxy */;
+			targetProxy = 1AFFP008 /* PBXContainerItemProxy */;
 		};
-		1A001094 /* PBXTargetDependency */ = {
+		1AFFD009 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A001024 /* AbilityKit */;
-			targetProxy = 1A001095 /* PBXContainerItemProxy */;
+			targetProxy = 1AFFP009 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
