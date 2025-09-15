@@ -1,0 +1,179 @@
+# SwiftLint Configuration for HealerKit
+# Ensures clean, maintainable, and consistent Swift code across the project
+# Optimized for first-generation iPad Pro performance and healer-focused development
+
+# Directories to include when linting
+included:
+  - HealerKit/
+  - DungeonKit/
+  - AbilityKit/
+  - HealerUIKit/
+  - HealerKitTests/
+  - DungeonKitTests/
+  - AbilityKitTests/
+  - HealerUIKitTests/
+
+# Directories to exclude when linting
+excluded:
+  - Carthage/
+  - Pods/
+  - .build/
+  - DerivedData/
+  - Build/
+  - Package.swift
+
+# Disable rules that may conflict with project requirements
+disabled_rules:
+  - trailing_whitespace  # Temporary disable during development
+  - todo  # Allow TODO comments during active development
+  - line_length  # Handled by custom configuration below
+
+# Enable additional rules for better code quality
+opt_in_rules:
+  - array_init
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - contains_over_first_not_nil
+  - empty_count
+  - empty_string
+  - empty_xctest_method
+  - explicit_init
+  - extension_access_modifier
+  - fallthrough
+  - fatal_error_message
+  - file_header
+  - first_where
+  - force_unwrapping
+  - identical_operands
+  - implicit_return
+  - joined_default_parameter
+  - last_where
+  - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - modifier_order
+  - nimble_operator
+  - operator_usage_whitespace
+  - overridden_super_call
+  - override_in_extension
+  - pattern_matching_keywords
+  - prefer_self_type_over_type_of_self
+  - private_action
+  - private_outlet
+  - prohibited_interface_builder
+  - prohibited_super_call
+  - quick_discouraged_call
+  - quick_discouraged_focused_test
+  - quick_discouraged_pending_test
+  - reduce_into
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - single_test_class
+  - sorted_first_last
+  - sorted_imports
+  - static_operator
+  - strong_iboutlet
+  - toggle_bool
+  - unavailable_function
+  - unneeded_parentheses_in_closure_argument
+  - untyped_error_in_catch
+  - vertical_parameter_alignment_on_call
+  - vertical_whitespace_closing_braces
+  - vertical_whitespace_opening_braces
+  - yoda_condition
+
+# Rule configurations
+analyzer_rules:
+  - explicit_self
+  - unused_declaration
+  - unused_import
+
+# Length rules
+line_length:
+  warning: 120
+  error: 140
+  ignores_function_declarations: true
+  ignores_comments: true
+  ignores_urls: true
+
+function_body_length:
+  warning: 60
+  error: 100
+
+function_parameter_count:
+  warning: 6
+  error: 8
+
+type_body_length:
+  warning: 300
+  error: 500
+
+file_length:
+  warning: 400
+  error: 1000
+  ignore_comment_only_lines: true
+
+# Naming rules
+type_name:
+  min_length: 3
+  max_length: 40
+  excluded: ["ID", "URL", "UI"]
+
+identifier_name:
+  min_length: 2
+  max_length: 40
+  excluded: ["id", "url", "ui", "x", "y", "z", "r", "g", "b", "a"]
+
+# Indentation
+indentation: 4
+
+# Custom rules for game development consistency
+custom_rules:
+  # Enforce proper naming for game components
+  game_component_naming:
+    name: "Game Component Naming"
+    regex: "(class|struct|enum)\\s+(\\w*)(Character|Monster|Spell|Item|Ability|Dungeon|Room|Quest|Skill|Weapon|Armor|Potion|NPC|Player)(?!\\w)"
+    message: "Game components should be named descriptively"
+    severity: warning
+
+  # Encourage proper documentation for public APIs
+  public_api_documentation:
+    name: "Public API Documentation"
+    regex: "^(public|open)\\s+(class|struct|enum|func|var|let)(?!.*///).*$"
+    message: "Public APIs should be documented with ///"
+    severity: warning
+
+  # Discourage force unwrapping in production code
+  force_unwrap_in_production:
+    name: "Force Unwrap in Production"
+    regex: "!\\s*(?!//)(?![\\s\\S]*?//\\s*swiftlint:disable)"
+    message: "Avoid force unwrapping in production code. Consider using guard let or if let."
+    severity: error
+    excluded: ".*Tests\\.swift"
+
+  # Ensure proper error handling in game logic
+  game_logic_error_handling:
+    name: "Game Logic Error Handling"
+    regex: "throw\\s+\\w+Error"
+    message: "Consider using descriptive error messages for game logic errors"
+    severity: warning
+
+# Reporter configurations
+reporter: "xcode"
+
+# Warning threshold
+warning_threshold: 10
+
+# Strict mode - treat warnings as errors in CI
+strict: false
+
+# File header template
+file_header:
+  required_pattern: |
+                    \/\/
+                    \/\/\s*\w+\.swift
+                    \/\/\s*HealerKit
+                    \/\/
+                    \/\/\s*Created\s+.*
+                    \/\/
