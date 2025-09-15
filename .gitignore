@@ -1,0 +1,11 @@
+# Build artifacts and dependencies
+**/.build/
+**/Build/
+**/DerivedData/
+**/.swiftpm/
+**/.DS_Store
+Pods/
+Carthage/
+**/xcuserdata/
+**/*.xcworkspace/xcuserdata/
+**/*.xcodeproj/xcuserdata/
