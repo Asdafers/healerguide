@@ -7,7 +7,6 @@
 
 import UIKit
 import Foundation
-import HealerKitCore
 
 /// iPad-optimized boss encounter view controller for healer workflow
 /// Displays encounter details with color-coded ability cards and filtering capabilities

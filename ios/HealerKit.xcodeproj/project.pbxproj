@@ -27,8 +27,10 @@
 		1A001093 /* AbilityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A001025 /* AbilityKit.framework */; };
 		1A001094 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A001048 /* IntegrationTests.swift */; };
 		1AFFB048 /* HealerKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A001047 /* HealerKitTests.swift */; };
-        1AFD1001 /* DungeonDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD0001 /* DungeonDataProvider.swift */; };
-        1AFD1002 /* SeasonDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD0002 /* SeasonDataProvider.swift */; };
+		1AFD1001 /* DungeonDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD0001 /* DungeonDataProvider.swift */; };
+		1AFD1002 /* SeasonDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD0002 /* SeasonDataProvider.swift */; };
+		1AFD1003 /* SharedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD0003 /* SharedTypes.swift */; };
+		1AFD1004 /* SharedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD0003 /* SharedTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,8 +145,9 @@
 		1A001FFF /* DungeonKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonKit.swift; sourceTree = "<group>"; };
 		1A002FFF /* AbilityKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityKit.swift; sourceTree = "<group>"; };
 		1A003FFF /* HealerUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealerUIKit.swift; sourceTree = "<group>"; };
-        1AFD0001 /* DungeonDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/DungeonDataProvider.swift; sourceTree = "<group>"; };
-        1AFD0002 /* SeasonDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/SeasonDataProvider.swift; sourceTree = "<group>"; };
+		1AFD0001 /* DungeonDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/DungeonDataProvider.swift; sourceTree = "<group>"; };
+		1AFD0002 /* SeasonDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/SeasonDataProvider.swift; sourceTree = "<group>"; };
+		1AFD0003 /* SharedTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SharedTypes.swift; path = HealerKitCore/Models/SharedTypes.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +274,7 @@
 			children = (
 				1A002FFF /* AbilityKit.swift */,
 				1A001027 /* Info.plist */,
+				1AFD0003 /* SharedTypes.swift */,
 			);
 			path = AbilityKit;
 			sourceTree = "<group>";
@@ -280,6 +284,7 @@
 			children = (
 				1A003FFF /* HealerUIKit.swift */,
 				1A001037 /* Info.plist */,
+				1AFD0003 /* SharedTypes.swift */,
 			);
 			path = HealerUIKit;
 			sourceTree = "<group>";
@@ -649,6 +654,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A003000 /* AbilityKit.swift in Sources */,
+				1AFD1003 /* SharedTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,6 +663,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A004000 /* HealerUIKit.swift in Sources */,
+				1AFD1004 /* SharedTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,6 @@
 
 import UIKit
 import DungeonKit
-import HealerKitCore
 
 /// Type alias to bridge MainNavigationController with test expectations
 public typealias HealerNavigationController = MainNavigationController

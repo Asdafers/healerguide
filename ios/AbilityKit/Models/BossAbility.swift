@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData
-import HealerKitCore
 
 // Forward declaration to avoid circular imports
 @objc(BossEncounter)
