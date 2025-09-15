@@ -188,13 +188,13 @@ public final class DungeonDataProvider: DungeonDataProviding {
     private func performWithContext<T>(_ operation: @escaping (NSManagedObjectContext) async throws -> T) async throws -> T {
         return try await withCheckedThrowingContinuation { continuation in
             managedObjectContext.perform {
-                do {
-                    Task {
+                Task {
+                    do {
                         let result = try await operation(self.managedObjectContext)
                         continuation.resume(returning: result)
+                    } catch {
+                        continuation.resume(throwing: error)
                     }
-                } catch {
-                    continuation.resume(throwing: error)
                 }
             }
         }

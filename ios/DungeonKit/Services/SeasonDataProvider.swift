@@ -94,19 +94,20 @@ public final class SeasonDataProvider: SeasonDataProviding {
     /// Update season data from major patch content bundle
     public func updateSeasonData(_ seasonData: SeasonUpdateData) async throws {
         try await performWithContext { context in
-            // Start a transaction for data integrity
-            context.performAndWait {
-                do {
-                    try self.performSeasonUpdate(seasonData, in: context)
+            // We are already on the context's queue via performWithContext.
+            // Perform transactional update without performAndWait (avoids iOS 15+ availability).
+            do {
+                try self.performSeasonUpdate(seasonData, in: context)
+                if context.hasChanges {
                     try context.save()
-
-                    // Clear cache after successful update
-                    self.clearSeasonCache()
-
-                } catch {
-                    context.rollback()
-                    throw DungeonDataError.storageError(error)
                 }
+
+                // Clear cache after successful update
+                self.clearSeasonCache()
+
+            } catch {
+                context.rollback()
+                throw DungeonDataError.storageError(error)
             }
         }
     }
@@ -243,13 +244,13 @@ public final class SeasonDataProvider: SeasonDataProviding {
     private func performWithContext<T>(_ operation: @escaping (NSManagedObjectContext) async throws -> T) async throws -> T {
         return try await withCheckedThrowingContinuation { continuation in
             managedObjectContext.perform {
-                do {
-                    Task {
+                Task {
+                    do {
                         let result = try await operation(self.managedObjectContext)
                         continuation.resume(returning: result)
+                    } catch {
+                        continuation.resume(throwing: error)
                     }
-                } catch {
-                    continuation.resume(throwing: error)
                 }
             }
         }
