@@ -5,6 +5,7 @@
 //  Created by HealerKit on 2025-09-15.
 //
 
+#if canImport(CoreData)
 import Foundation
 import CoreData
 
@@ -46,7 +47,7 @@ public final class SeasonDataProvider: SeasonDataProviding {
             let request: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Season")
             request.predicate = NSPredicate(format: "isActive == YES")
             request.sortDescriptors = [
-                NSSortDescriptor(keyPath: \NSManagedObject.value(forKey: "updatedAt"), ascending: false)
+                NSSortDescriptor(key: "updatedAt", ascending: false)
             ]
             request.fetchLimit = 1
 
@@ -76,7 +77,7 @@ public final class SeasonDataProvider: SeasonDataProviding {
             // Fetch from CoreData
             let request: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Season")
             request.sortDescriptors = [
-                NSSortDescriptor(keyPath: \NSManagedObject.value(forKey: "createdAt"), ascending: false)
+                NSSortDescriptor(key: "createdAt", ascending: false)
             ]
 
             let results = try context.fetch(request)
@@ -276,4 +277,5 @@ public final class SeasonDataProvider: SeasonDataProviding {
             updatedAt: updatedAt
         )
     }
-}#endif
+}
+#endif

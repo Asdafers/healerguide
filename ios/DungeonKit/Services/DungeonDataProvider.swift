@@ -55,7 +55,7 @@ public final class DungeonDataProvider: DungeonDataProviding {
             // Fetch from CoreData
             let request: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Dungeon")
             request.predicate = NSPredicate(format: "seasonId == %@", activeSeason.id as CVarArg)
-            request.sortDescriptors = [NSSortDescriptor(keyPath: \NSManagedObject.value(forKey: "displayOrder"), ascending: true)]
+            request.sortDescriptors = [NSSortDescriptor(key: "displayOrder", ascending: true)]
 
             let results = try context.fetch(request)
             let dungeons = try results.map { try self.convertToDungeonEntity($0) }
@@ -123,7 +123,7 @@ public final class DungeonDataProvider: DungeonDataProviding {
                 activeSeason.id as CVarArg, trimmedQuery, trimmedQuery
             )
             request.sortDescriptors = [
-                NSSortDescriptor(keyPath: \NSManagedObject.value(forKey: "name"), ascending: true)
+                NSSortDescriptor(key: "name", ascending: true)
             ]
 
             let results = try context.fetch(request)
@@ -155,7 +155,7 @@ public final class DungeonDataProvider: DungeonDataProviding {
             let request: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "BossEncounter")
             request.predicate = NSPredicate(format: "dungeonId == %@", dungeonId as CVarArg)
             request.sortDescriptors = [
-                NSSortDescriptor(keyPath: \NSManagedObject.value(forKey: "encounterOrder"), ascending: true)
+                NSSortDescriptor(key: "encounterOrder", ascending: true)
             ]
 
             let results = try context.fetch(request)
@@ -250,4 +250,5 @@ public final class DungeonDataProvider: DungeonDataProviding {
             abilityCount: abilityCount
         )
     }
-}#endif
+}
+#endif
