@@ -1,0 +1,541 @@
+{
+  "seasonInfo": {
+    "id": "12345678-1234-5678-9012-123456789012",
+    "name": "The War Within Season 1",
+    "majorPatchVersion": "11.0",
+    "isActive": true,
+    "dungeonCount": 8,
+    "createdAt": "2024-08-26T00:00:00Z",
+    "updatedAt": "2024-08-26T00:00:00Z"
+  },
+  "dungeons": [
+    {
+      "dungeonInfo": {
+        "id": "87654321-4321-8765-2109-876543210987",
+        "name": "The Stonevault",
+        "shortName": "SV",
+        "difficultyLevel": "Mythic+",
+        "displayOrder": 1,
+        "estimatedDuration": 1800,
+        "healerNotes": "High sustained damage throughout. Be ready for dispels on trash packs.",
+        "bossCount": 4
+      },
+      "bossEncounters": [
+        {
+          "encounterInfo": {
+            "id": "11111111-1111-1111-1111-111111111111",
+            "name": "E.D.N.A",
+            "encounterOrder": 1,
+            "healerSummary": "Tank and melee take heavy damage from seismic waves. Dispel magic debuffs quickly.",
+            "difficultyRating": 3,
+            "estimatedDuration": 300,
+            "keyMechanics": ["Seismic Wave", "Volatile Explosion", "Earth Barrier"],
+            "abilityCount": 6
+          },
+          "abilities": [
+            {
+              "id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "name": "Seismic Wave",
+              "type": "AoE Damage",
+              "targets": "All Players",
+              "damageProfile": "High",
+              "healerAction": "Raid cooldown + AoE healing",
+              "criticalInsight": "Damage increases with each cast",
+              "cooldown": 30.0,
+              "displayOrder": 1,
+              "isKeyMechanic": true
+            }
+          ]
+        },
+        {
+          "encounterInfo": {
+            "id": "22222222-2222-2222-2222-222222222222",
+            "name": "Skarmorak",
+            "encounterOrder": 2,
+            "healerSummary": "Manage void zones while healing steady damage. High priority dispels during burrow phases.",
+            "difficultyRating": 4,
+            "estimatedDuration": 360,
+            "keyMechanics": ["Void Fracture", "Crystalline Eruption", "Burrow"],
+            "abilityCount": 8
+          },
+          "abilities": [
+            {
+              "id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+              "name": "Void Fracture",
+              "type": "Ground AoE",
+              "targets": "Area",
+              "damageProfile": "Critical",
+              "healerAction": "Move out immediately, no healing through it",
+              "criticalInsight": "Instant death if not avoided",
+              "cooldown": 25.0,
+              "displayOrder": 1,
+              "isKeyMechanic": true
+            }
+          ]
+        },
+        {
+          "encounterInfo": {
+            "id": "33333333-3333-3333-3333-333333333333",
+            "name": "Master Machinists",
+            "encounterOrder": 3,
+            "healerSummary": "Two-target fight with overlapping damage phases. Coordinate cooldowns carefully.",
+            "difficultyRating": 5,
+            "estimatedDuration": 420,
+            "keyMechanics": ["Blazing Crescendo", "Molten Metal", "Scrap Song"],
+            "abilityCount": 10
+          },
+          "abilities": [
+            {
+              "id": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+              "name": "Blazing Crescendo",
+              "type": "Raid Damage",
+              "targets": "All Players",
+              "damageProfile": "Critical",
+              "healerAction": "Major raid cooldown required",
+              "criticalInsight": "Damage ramps up over 8 seconds",
+              "cooldown": 60.0,
+              "displayOrder": 1,
+              "isKeyMechanic": true
+            }
+          ]
+        },
+        {
+          "encounterInfo": {
+            "id": "44444444-4444-4444-4444-444444444444",
+            "name": "Void Speaker Eirich",
+            "encounterOrder": 4,
+            "healerSummary": "Heavy shadow damage with mind control mechanics. Dispel aggressively and maintain distance.",
+            "difficultyRating": 4,
+            "estimatedDuration": 390,
+            "keyMechanics": ["Void Corruption", "Entropic Reckoning", "Whispers of the Void"],
+            "abilityCount": 7
+          },
+          "abilities": [
+            {
+              "id": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+              "name": "Entropic Reckoning",
+              "type": "Execute",
+              "targets": "All Players",
+              "damageProfile": "Critical",
+              "healerAction": "Full raid cooldowns + personals",
+              "criticalInsight": "Wipe mechanic at 20% - save all cooldowns",
+              "cooldown": null,
+              "displayOrder": 1,
+              "isKeyMechanic": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dungeonInfo": {
+        "id": "98765432-5432-9876-3210-987654321098",
+        "name": "Ara-Kara, City of Echoes",
+        "shortName": "AK",
+        "difficultyLevel": "Mythic+",
+        "displayOrder": 2,
+        "estimatedDuration": 1680,
+        "healerNotes": "Web mechanics require positioning awareness. Heavy DoT damage on several encounters.",
+        "bossCount": 3
+      },
+      "bossEncounters": [
+        {
+          "encounterInfo": {
+            "id": "55555555-5555-5555-5555-555555555555",
+            "name": "Avanoxx",
+            "encounterOrder": 1,
+            "healerSummary": "Web positioning crucial. High DoT damage requires sustained healing and dispels.",
+            "difficultyRating": 3,
+            "estimatedDuration": 330,
+            "keyMechanics": ["Gossamer Onslaught", "Web Bolt", "Poisonous Cloud"],
+            "abilityCount": 6
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "66666666-6666-6666-6666-666666666666",
+            "name": "Anub'zekt",
+            "encounterOrder": 2,
+            "healerSummary": "Burrow phases with adds. Manage scarab swarms while maintaining tank healing.",
+            "difficultyRating": 4,
+            "estimatedDuration": 360,
+            "keyMechanics": ["Burrow", "Scarab Swarm", "Impaling Eruption"],
+            "abilityCount": 8
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "77777777-7777-7777-7777-777777777777",
+            "name": "Ki'katal the Harvester",
+            "encounterOrder": 3,
+            "healerSummary": "Platform phases with heavy raid damage. Coordinate movement with healing cooldowns.",
+            "difficultyRating": 5,
+            "estimatedDuration": 450,
+            "keyMechanics": ["Harvest", "Cosmic Singularity", "Void Wave"],
+            "abilityCount": 9
+          },
+          "abilities": []
+        }
+      ]
+    },
+    {
+      "dungeonInfo": {
+        "id": "13579246-1357-9246-8024-135792468024",
+        "name": "City of Threads",
+        "shortName": "CoT",
+        "difficultyLevel": "Mythic+",
+        "displayOrder": 3,
+        "estimatedDuration": 1740,
+        "healerNotes": "Stealth mechanics and damage over time effects. Maintain awareness of invisible threats.",
+        "bossCount": 3
+      },
+      "bossEncounters": [
+        {
+          "encounterInfo": {
+            "id": "88888888-8888-8888-8888-888888888888",
+            "name": "Orator Krix'vizk",
+            "encounterOrder": 1,
+            "healerSummary": "Fear mechanics with damage spikes. Pre-position for fear breaks and burst healing.",
+            "difficultyRating": 3,
+            "estimatedDuration": 340,
+            "keyMechanics": ["Terrorize", "Shadow Clone", "Void Eruption"],
+            "abilityCount": 7
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "99999999-9999-9999-9999-999999999999",
+            "name": "Fangs of the Queen",
+            "encounterOrder": 2,
+            "healerSummary": "Multi-target encounter with poison mechanics. Heavy dispel requirements throughout.",
+            "difficultyRating": 4,
+            "estimatedDuration": 380,
+            "keyMechanics": ["Venomous Spit", "Web Wrap", "Poison Pool"],
+            "abilityCount": 8
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "aaaabbbb-aaaa-bbbb-aaaa-bbbbaaaabbbb",
+            "name": "The Coaglamation",
+            "encounterOrder": 3,
+            "healerSummary": "Absorb shield mechanic with escalating damage. Time cooldowns with shield breaks.",
+            "difficultyRating": 5,
+            "estimatedDuration": 420,
+            "keyMechanics": ["Dark Pulse", "Viscous Shield", "Blood Surge"],
+            "abilityCount": 9
+          },
+          "abilities": []
+        }
+      ]
+    },
+    {
+      "dungeonInfo": {
+        "id": "24681357-2468-1357-9135-246813579135",
+        "name": "The Dawnbreaker",
+        "shortName": "DAWN",
+        "difficultyLevel": "Mythic+",
+        "displayOrder": 4,
+        "estimatedDuration": 1620,
+        "healerNotes": "Aerial combat phases. Positioning crucial for avoiding void zones during flight.",
+        "bossCount": 3
+      },
+      "bossEncounters": [
+        {
+          "encounterInfo": {
+            "id": "ccccdddd-cccc-dddd-cccc-ddddccccdddd",
+            "name": "Speaker Shadowcrown",
+            "encounterOrder": 1,
+            "healerSummary": "Shadow damage ramp with silence effects. Maintain healing while managing debuffs.",
+            "difficultyRating": 3,
+            "estimatedDuration": 320,
+            "keyMechanics": ["Shadow Word: Pain", "Silence", "Dark Ritual"],
+            "abilityCount": 6
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "eeeeaaaa-eeee-aaaa-eeee-aaaaeeeeaaaa",
+            "name": "Anub'ikkaj",
+            "encounterOrder": 2,
+            "healerSummary": "Burrow mechanics on airship. Limited space for movement, high precision required.",
+            "difficultyRating": 4,
+            "estimatedDuration": 360,
+            "keyMechanics": ["Burrowing Charge", "Web Bombs", "Impale"],
+            "abilityCount": 8
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "ffffbbbb-ffff-bbbb-ffff-bbbbffffbbbb",
+            "name": "Rasha'nan",
+            "encounterOrder": 3,
+            "healerSummary": "Flying boss with ground phases. Coordinate healing with movement between platforms.",
+            "difficultyRating": 5,
+            "estimatedDuration": 480,
+            "keyMechanics": ["Rolling Acid", "Acidic Eruption", "Savage Assault"],
+            "abilityCount": 10
+          },
+          "abilities": []
+        }
+      ]
+    },
+    {
+      "dungeonInfo": {
+        "id": "97531864-9753-1864-2097-975318642097",
+        "name": "Mists of Tirna Scithe",
+        "shortName": "MISTS",
+        "difficultyLevel": "Mythic+",
+        "displayOrder": 5,
+        "estimatedDuration": 1800,
+        "healerNotes": "Nature damage throughout. Maze navigation requires team coordination and sustained healing.",
+        "bossCount": 3
+      },
+      "bossEncounters": [
+        {
+          "encounterInfo": {
+            "id": "ggggcccc-gggg-cccc-gggg-ccccggggcccc",
+            "name": "Ingra Maloch",
+            "encounterOrder": 1,
+            "healerSummary": "Nature DoTs with dispel immunity phases. Time dispels carefully around mechanics.",
+            "difficultyRating": 3,
+            "estimatedDuration": 350,
+            "keyMechanics": ["Drred Harvest", "Repulsive Visage", "Death Shroud"],
+            "abilityCount": 7
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "hhhhdddd-hhhh-dddd-hhhh-ddddhhhhddd",
+            "name": "Mistcaller",
+            "encounterOrder": 2,
+            "healerSummary": "Teleport maze with damage over time. Maintain healing while navigating portals.",
+            "difficultyRating": 4,
+            "estimatedDuration": 420,
+            "keyMechanics": ["Guessing Game", "Dodge Ball", "Patty Cake"],
+            "abilityCount": 6
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "iiiieeee-iiii-eeee-iiii-eeeeiiiieee",
+            "name": "Tred'ova",
+            "encounterOrder": 3,
+            "healerSummary": "Puddle mechanics with mind control. Dispel and position for optimal healing coverage.",
+            "difficultyRating": 4,
+            "estimatedDuration": 380,
+            "keyMechanics": ["Consumption", "Accelerated Incubation", "Parasitic Pacification"],
+            "abilityCount": 8
+          },
+          "abilities": []
+        }
+      ]
+    },
+    {
+      "dungeonInfo": {
+        "id": "86429753-8642-9753-1086-864297531086",
+        "name": "The Necrotic Wake",
+        "shortName": "NW",
+        "difficultyLevel": "Mythic+",
+        "displayOrder": 6,
+        "estimatedDuration": 1680,
+        "healerNotes": "Necrotic debuffs and undead mechanics. Heavy dispel requirements and positioning awareness.",
+        "bossCount": 4
+      },
+      "bossEncounters": [
+        {
+          "encounterInfo": {
+            "id": "jjjjffff-jjjj-ffff-jjjj-ffffjjjjffff",
+            "name": "Blightbone",
+            "encounterOrder": 1,
+            "healerSummary": "Hook mechanics with disease spread. Manage positioning while maintaining tank healing.",
+            "difficultyRating": 2,
+            "estimatedDuration": 280,
+            "keyMechanics": ["Heaving Retch", "Fetid Gas", "Crunch"],
+            "abilityCount": 5
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "kkkkgggg-kkkk-gggg-kkkk-ggggkkkkgggg",
+            "name": "Amarth, The Harvester",
+            "encounterOrder": 2,
+            "healerSummary": "Add waves with necrotic healing absorption. Focus adds while maintaining group health.",
+            "difficultyRating": 3,
+            "estimatedDuration": 340,
+            "keyMechanics": ["Land of the Dead", "Harvest Soul", "Final Harvest"],
+            "abilityCount": 7
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "llllhhhh-llll-hhhh-llll-hhhhlllhhhh",
+            "name": "Surgeon Stitchflesh",
+            "encounterOrder": 3,
+            "healerSummary": "Hook and operating table mechanics. Rescue hooked players quickly while healing damage.",
+            "difficultyRating": 4,
+            "estimatedDuration": 360,
+            "keyMechanics": ["Meat Hook", "Stitchneedle", "Embalming Ichor"],
+            "abilityCount": 8
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "mmmmiiii-mmmm-iiii-mmmm-iiiimmmmiii",
+            "name": "Nalthor the Rimebinder",
+            "encounterOrder": 4,
+            "healerSummary": "Frost mechanics with movement restriction. Coordinate healing with ice wall placement.",
+            "difficultyRating": 4,
+            "estimatedDuration": 390,
+            "keyMechanics": ["Comet Storm", "Icebound Aegis", "Dark Exile"],
+            "abilityCount": 9
+          },
+          "abilities": []
+        }
+      ]
+    },
+    {
+      "dungeonInfo": {
+        "id": "75319864-7531-9864-2075-753198642075",
+        "name": "Siege of Boralus",
+        "shortName": "SoB",
+        "difficultyLevel": "Mythic+",
+        "displayOrder": 7,
+        "estimatedDuration": 1920,
+        "healerNotes": "Maritime combat with cannon mechanics. Coordinate healing during ship-to-ship phases.",
+        "bossCount": 4
+      },
+      "bossEncounters": [
+        {
+          "encounterInfo": {
+            "id": "nnnnjjjj-nnnn-jjjj-nnnn-jjjjnnnnjjj",
+            "name": "Chopper Redhook",
+            "encounterOrder": 1,
+            "healerSummary": "Meat hook and cleave damage. Position to avoid hooks while maintaining healing coverage.",
+            "difficultyRating": 3,
+            "estimatedDuration": 320,
+            "keyMechanics": ["Meat Hook", "Heavy Slash", "Gore Crash"],
+            "abilityCount": 6
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "ooookkkk-oooo-kkkk-oooo-kkkkoookkk",
+            "name": "Sergeant Bainbridge",
+            "encounterOrder": 2,
+            "healerSummary": "Heavy Shot with knockback. Coordinate positioning for optimal healing after movement.",
+            "difficultyRating": 3,
+            "estimatedDuration": 340,
+            "keyMechanics": ["Heavy Shot", "Iron Gaze", "Haymaker"],
+            "abilityCount": 6
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "ppppllll-pppp-llll-pppp-llllpppllll",
+            "name": "Dread Captain Lockwood",
+            "encounterOrder": 3,
+            "healerSummary": "Cannon barrage and adds. Heal through barrage while managing add positioning.",
+            "difficultyRating": 4,
+            "estimatedDuration": 420,
+            "keyMechanics": ["Eudora's Shot", "Clear the Deck", "Crimson Swipe"],
+            "abilityCount": 8
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "qqqqmmmm-qqqq-mmmm-qqqq-mmmmqqqqmmm",
+            "name": "Viq'Goth",
+            "encounterOrder": 4,
+            "healerSummary": "Tentacle phases with demolish mechanics. Coordinate cooldowns with tentacle spawns.",
+            "difficultyRating": 5,
+            "estimatedDuration": 480,
+            "keyMechanics": ["Demolish", "Putrid Waters", "Call of the Deep"],
+            "abilityCount": 10
+          },
+          "abilities": []
+        }
+      ]
+    },
+    {
+      "dungeonInfo": {
+        "id": "64208531-6420-8531-9764-642085319764",
+        "name": "Grim Batol",
+        "shortName": "GB",
+        "difficultyLevel": "Mythic+",
+        "displayOrder": 8,
+        "estimatedDuration": 2040,
+        "healerNotes": "Dragon encounters with aerial phases. Heavy AoE damage requires coordinated cooldowns.",
+        "bossCount": 4
+      },
+      "bossEncounters": [
+        {
+          "encounterInfo": {
+            "id": "rrrrnnnn-rrrr-nnnn-rrrr-nnnnrrrrnnnn",
+            "name": "General Umbriss",
+            "encounterOrder": 1,
+            "healerSummary": "Ground Siege with positioning requirements. Heal through blitz while managing movement.",
+            "difficultyRating": 3,
+            "estimatedDuration": 380,
+            "keyMechanics": ["Ground Siege", "Blitz", "Frenzy"],
+            "abilityCount": 7
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "ssssoooo-ssss-oooo-ssss-oooossssoooo",
+            "name": "Forgemaster Throngus",
+            "encounterOrder": 2,
+            "healerSummary": "Three-phase encounter with different mechanics. Adapt healing strategy per weapon phase.",
+            "difficultyRating": 4,
+            "estimatedDuration": 450,
+            "keyMechanics": ["Dual Wield", "Shield Slam", "Mace Smash"],
+            "abilityCount": 9
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "ttttpppp-tttt-pppp-tttt-ppppttttpppp",
+            "name": "Drahga Shadowburner",
+            "encounterOrder": 3,
+            "healerSummary": "Dragon mount phase with fire damage. Coordinate healing with dragon landing patterns.",
+            "difficultyRating": 4,
+            "estimatedDuration": 420,
+            "keyMechanics": ["Burning Shadowbolt", "Valiona's Flame", "Twilight Protection"],
+            "abilityCount": 8
+          },
+          "abilities": []
+        },
+        {
+          "encounterInfo": {
+            "id": "uuuuqqqq-uuuu-qqqq-uuuu-qqqquuuuqqqq",
+            "name": "Erudax, the Duke of Below",
+            "encounterOrder": 4,
+            "healerSummary": "Shadow mechanics with add spawns. Manage faceless adds while maintaining raid healing.",
+            "difficultyRating": 5,
+            "estimatedDuration": 540,
+            "keyMechanics": ["Enfeebling Blow", "Shadow Gale", "Binding Shadows"],
+            "abilityCount": 10
+          },
+          "abilities": []
+        }
+      ]
+    }
+  ]
+}
