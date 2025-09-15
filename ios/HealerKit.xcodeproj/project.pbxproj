@@ -26,67 +26,67 @@
 		1A001090 /* DungeonKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A001015 /* DungeonKit.framework */; };
 		1A001093 /* AbilityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A001025 /* AbilityKit.framework */; };
 		1A001094 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A001048 /* IntegrationTests.swift */; };
-		1A001048 /* HealerKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A001047 /* HealerKitTests.swift */; };
+		1AFFB048 /* HealerKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A001047 /* HealerKitTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1AFFP001 /* PBXContainerItemProxy */ = {
+		1AFFE101 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001014;
 			remoteInfo = DungeonKit;
 		};
-		1AFFP002 /* PBXContainerItemProxy */ = {
+		1AFFE102 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001024;
 			remoteInfo = AbilityKit;
 		};
-		1AFFP003 /* PBXContainerItemProxy */ = {
+		1AFFE103 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001034;
 			remoteInfo = HealerUIKit;
 		};
-		1AFFP004 /* PBXContainerItemProxy */ = {
+		1AFFE104 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A000FFB;
 			remoteInfo = HealerKit;
 		};
-		1AFFP005 /* PBXContainerItemProxy */ = {
+		1AFFE105 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001014;
 			remoteInfo = DungeonKit;
 		};
-		1AFFP006 /* PBXContainerItemProxy */ = {
+		1AFFE106 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001024;
 			remoteInfo = AbilityKit;
 		};
-		1AFFP007 /* PBXContainerItemProxy */ = {
+		1AFFE107 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001034;
 			remoteInfo = HealerUIKit;
 		};
-		1AFFP008 /* PBXContainerItemProxy */ = {
+		1AFFE108 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A001014;
 			remoteInfo = DungeonKit;
 		};
-		1AFFP009 /* PBXContainerItemProxy */ = {
+		1AFFE109 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A000FF4 /* Project object */;
 			proxyType = 1;
@@ -152,14 +152,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A001011 /* Frameworks */ = {
+		1A001012 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A001021 /* Frameworks */ = {
+		1A001022 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -167,7 +167,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A001031 /* Frameworks */ = {
+		1A001032 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -325,14 +325,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A001020 /* Headers */ = {
+		1A00102H /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A001030 /* Headers */ = {
+		1A00103H /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -344,7 +344,7 @@
 /* Begin PBXNativeTarget section */
 		1A000FFB /* HealerKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A00101F /* Build configuration list for PBXNativeTarget "HealerKit" */;
+			buildConfigurationList = 1A00108E /* Build configuration list for PBXNativeTarget "HealerKit" */;
 			buildPhases = (
 				1A000FF8 /* Sources */,
 				1A000FF9 /* Frameworks */,
@@ -383,10 +383,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A00102C /* Build configuration list for PBXNativeTarget "AbilityKit" */;
 			buildPhases = (
-				1A001020 /* Headers */,
-				1A001021 /* Sources */,
+				1A00102H /* Headers */,
+				1A00102S /* Sources */,
 				1A001022 /* Frameworks */,
-				1A001023 /* Resources */,
+				1AFFE023 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -402,8 +402,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A00103C /* Build configuration list for PBXNativeTarget "HealerUIKit" */;
 			buildPhases = (
-				1A001030 /* Headers */,
-				1A001031 /* Sources */,
+				1A00103H /* Headers */,
+				1A00103S /* Sources */,
 				1A001032 /* Frameworks */,
 				1A001033 /* Resources */,
 			);
@@ -421,7 +421,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A00104C /* Build configuration list for PBXNativeTarget "HealerKitTests" */;
 			buildPhases = (
-				1A001041 /* Sources */,
+				1A0010A1 /* Sources */,
 				1A001042 /* Frameworks */,
 				1A001043 /* Resources */,
 			);
@@ -572,7 +572,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A001023 /* Resources */ = {
+		1AFFE023 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -636,7 +636,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A001021 /* Sources */ = {
+		1A00102S /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -644,7 +644,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A001031 /* Sources */ = {
+		1A00103S /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -652,11 +652,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A001041 /* Sources */ = {
+		1A0010A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A001048 /* HealerKitTests.swift in Sources */,
+				1AFFB048 /* HealerKitTests.swift in Sources */,
 				1A001094 /* IntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1222,7 +1222,7 @@
 			};
 			name = Debug;
 		};
-		1A001090 /* Release */ = {
+		1A00R090 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1329,7 +1329,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1A00108F /* Debug */,
-				1A001090 /* Release */,
+					1A00R090 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
