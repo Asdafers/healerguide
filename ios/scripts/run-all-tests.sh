@@ -117,16 +117,21 @@ main() {
     local failed_tests=0
     local total_tests=0
 
-    declare -A test_classes
-    test_classes["DungeonTests"]="Dungeon Model Tests"
-    test_classes["BossEncounterTests"]="Boss Encounter Model Tests"
-    test_classes["SeasonTests"]="Season Model Tests"
-    test_classes["DungeonKitTests"]="DungeonKit Framework Tests"
+    # Test classes to run (class_name:display_name format)
+    local test_classes=(
+        "DungeonTests:Dungeon Model Tests"
+        "BossEncounterTests:Boss Encounter Model Tests"
+        "SeasonTests:Season Model Tests"
+        "DungeonKitTests:DungeonKit Framework Tests"
+    )
 
     # Run each test class
-    for class in "${!test_classes[@]}"; do
+    for test_entry in "${test_classes[@]}"; do
+        local class_name="${test_entry%%:*}"
+        local display_name="${test_entry#*:}"
+
         ((total_tests++))
-        if ! run_test_class "$class" "${test_classes[$class]}"; then
+        if ! run_test_class "$class_name" "$display_name"; then
             ((failed_tests++))
         fi
         echo
