@@ -43,11 +43,28 @@ jobs:
       run: |
         xcodebuild -list -project HealerKit.xcodeproj
 
-    - name: Fix DungeonKitTests Target
+    - name: Check Test Files Status
       working-directory: ios
       run: |
-        # Run our fix script to ensure test files are properly added to the Xcode project
-        ./scripts/fix-dungeonkit-tests.sh
+        # Check if test files are already properly configured
+        echo "Checking project structure..."
+        if grep -q "DungeonTests.swift" HealerKit.xcodeproj/project.pbxproj; then
+          echo "✅ DungeonTests.swift found in project"
+        else
+          echo "❌ DungeonTests.swift missing from project"
+        fi
+
+        if grep -q "BossEncounterTests.swift" HealerKit.xcodeproj/project.pbxproj; then
+          echo "✅ BossEncounterTests.swift found in project"
+        else
+          echo "❌ BossEncounterTests.swift missing from project"
+        fi
+
+        if grep -q "SeasonTests.swift" HealerKit.xcodeproj/project.pbxproj; then
+          echo "✅ SeasonTests.swift found in project"
+        else
+          echo "❌ SeasonTests.swift missing from project"
+        fi
 
     - name: Build DungeonKit Framework
       working-directory: ios

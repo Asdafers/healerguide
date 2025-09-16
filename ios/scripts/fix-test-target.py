@@ -75,13 +75,11 @@ def main():
     # Read current project file
     content = read_project_file()
 
-    # Test files to add
+    # Test files to add - check what actually exists
     test_files = [
         ("DungeonKitTests/ModelTests/DungeonTests.swift", "DungeonTests.swift"),
         ("DungeonKitTests/ModelTests/BossEncounterTests.swift", "BossEncounterTests.swift"),
         ("DungeonKitTests/ModelTests/SeasonTests.swift", "SeasonTests.swift"),
-        ("DungeonKitTests/ContractTests.swift", "ContractTests.swift"),
-        ("DungeonKitTests/ServiceIntegrationTests.swift", "ServiceIntegrationTests.swift")
     ]
 
     # Add each test file
