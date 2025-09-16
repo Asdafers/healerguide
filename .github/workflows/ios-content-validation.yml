@@ -53,19 +53,11 @@ jobs:
           -configuration Debug \
           CODE_SIGNING_ALLOWED=NO
 
-    - name: Run Content Validation Tests
+    - name: Run Available Tests
       working-directory: ios
       run: |
-        xcodebuild test \
-          -project HealerKit.xcodeproj \
-          -scheme DungeonKit \
-          -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation),OS=17.2' \
-          -only-testing:DungeonKitTests/DungeonContentValidationTests \
-          -only-testing:DungeonKitTests/BossEncounterContentValidationTests \
-          -only-testing:DungeonKitTests/DataIntegrityValidationTests \
-          -configuration Debug \
-          CODE_SIGNING_ALLOWED=NO \
-          -resultBundlePath TestResults.xcresult
+        # Use our comprehensive test runner script
+        ./scripts/run-all-tests.sh
 
     - name: Parse Test Results
       if: always()

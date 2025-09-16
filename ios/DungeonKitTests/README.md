@@ -43,25 +43,39 @@ Located in `ContentValidationTests/`:
 # Navigate to iOS project directory
 cd ios
 
-# Run specific content validation test suites
+# Run all available tests (recommended)
+./scripts/run-all-tests.sh
+
+# Run specific model test suites
 xcodebuild test \
   -project HealerKit.xcodeproj \
   -scheme DungeonKit \
-  -destination 'platform=iOS Simulator,name=iPhone 15' \
-  -only-testing:DungeonKitTests/DungeonContentValidationTests
+  -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation)' \
+  -only-testing:DungeonKitTests/DungeonTests
 
-# Run all content validation tests
-xcodebuild test \
-  -project HealerKit.xcodeproj \
-  -scheme DungeonKit \
-  -destination 'platform=iOS Simulator,name=iPhone 15' \
-  -only-testing:DungeonKitTests/DungeonContentValidationTests \
-  -only-testing:DungeonKitTests/BossEncounterContentValidationTests \
-  -only-testing:DungeonKitTests/DataIntegrityValidationTests
-
-# Use the helper script (recommended)
+# Run individual validation tests
 ./scripts/run-content-validation-tests.sh
 ```
+
+### Current Test Status
+
+**✅ Working Tests (Included in CI):**
+- `DungeonTests.swift` - Complete Dungeon model validation
+- `BossEncounterTests.swift` - Complete BossEncounter model validation
+- `SeasonTests.swift` - Season model validation
+- `DungeonKitTests.swift` - Framework integration tests
+
+**📝 Available Tests (Need Xcode Project Integration):**
+- `ContentValidationTests/DungeonContentValidationTests.swift` - Comprehensive dungeon content validation
+- `ContentValidationTests/BossEncounterContentValidationTests.swift` - Boss encounter content quality validation
+- `ContentValidationTests/DataIntegrityValidationTests.swift` - Cross-reference integrity validation
+
+**To Add Content Validation Tests to Xcode Project:**
+1. Open `HealerKit.xcodeproj` in Xcode
+2. Right-click `DungeonKitTests` group → Add Files
+3. Select the `ContentValidationTests/` directory
+4. Ensure files are added to `DungeonKitTests` target
+5. Build and run tests normally
 
 ### Using the Test Script
 
