@@ -1,0 +1,469 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: rgba(17, 24, 39, 0.87);
+  background-color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  /* Healer-specific color variables */
+  --damage-critical: #DC2626; /* red-600 */
+  --damage-high: #EA580C; /* orange-600 */
+  --damage-moderate: #CA8A04; /* yellow-600 */
+  --damage-mechanic: #2563EB; /* blue-600 */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  width: 100%;
+}
+
+/* Chrome browser detection styles */
+.browser-warning {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid #f3f4f6;
+  border-radius: 50%;
+  border-top-color: var(--damage-mechanic);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Page-specific styles */
+
+/* HomePage */
+.home-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.offline-indicator {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: #dc2626;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  z-index: 1000;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.connection-required {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #6b7280;
+}
+
+.connection-required h2 {
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+.offline-instructions {
+  text-align: left;
+  display: inline-block;
+  margin-top: 2rem;
+}
+
+.offline-instructions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.offline-instructions li {
+  padding: 0.5rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.offline-instructions li::before {
+  content: "💡";
+  position: absolute;
+  left: 0;
+}
+
+.season-info {
+  margin-bottom: 2rem;
+}
+
+.season-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, var(--damage-mechanic), #3b82f6);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.season-version {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+}
+
+.season-status {
+  font-size: 0.75rem;
+  background-color: #10b981;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Healer Tips */
+.healer-tips {
+  margin-top: 4rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  border-radius: 1rem;
+  border: 1px solid #bae6fd;
+}
+
+.healer-tips h3 {
+  margin: 0 0 1.5rem 0;
+  color: #0c4a6e;
+  font-size: 1.5rem;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.tip-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.tip-card h4 {
+  margin: 0 0 1rem 0;
+  color: #1f2937;
+}
+
+.color-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.color-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.color-dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+}
+
+.color-item.damage-critical .color-dot {
+  background-color: var(--damage-critical);
+}
+
+.color-item.damage-high .color-dot {
+  background-color: var(--damage-high);
+}
+
+.color-item.damage-moderate .color-dot {
+  background-color: var(--damage-moderate);
+}
+
+.color-item.damage-mechanic .color-dot {
+  background-color: var(--damage-mechanic);
+}
+
+/* DungeonPage */
+.dungeon-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+}
+
+.breadcrumb-link {
+  color: var(--damage-mechanic);
+  text-decoration: none;
+  hover: underline;
+}
+
+.breadcrumb-separator {
+  color: #6b7280;
+}
+
+.breadcrumb-current {
+  color: #374151;
+  font-weight: 500;
+}
+
+.dungeon-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.dungeon-title h1 {
+  margin: 0 0 1rem 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.dungeon-metadata {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  color: #6b7280;
+}
+
+.duration, .difficulty, .boss-count {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.difficulty-stars {
+  display: flex;
+  gap: 0.125rem;
+}
+
+.star {
+  font-size: 1rem;
+}
+
+.star.filled {
+  color: #fbbf24;
+}
+
+.star.empty {
+  color: #d1d5db;
+}
+
+.dungeon-healer-notes {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-left: 4px solid #f59e0b;
+  border-radius: 0.5rem;
+}
+
+.dungeon-healer-notes h3 {
+  margin: 0 0 0.75rem 0;
+  color: #92400e;
+  font-size: 1.125rem;
+}
+
+.dungeon-healer-notes p {
+  margin: 0;
+  color: #92400e;
+  line-height: 1.6;
+}
+
+/* Boss Encounters Grid */
+.boss-encounters-section h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.boss-encounters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.boss-encounter-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid #e5e7eb;
+}
+
+.boss-encounter-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: var(--damage-mechanic);
+}
+
+.boss-encounter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.boss-encounter-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.boss-order {
+  background-color: var(--damage-mechanic);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.healing-summary {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #f0f9ff;
+  border-radius: 0.375rem;
+  border-left: 3px solid var(--damage-mechanic);
+}
+
+.healing-summary h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e40af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.healing-summary p {
+  margin: 0;
+  color: #1e40af;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.boss-stats {
+  margin-bottom: 1rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Error states */
+.season-loading,
+.season-error,
+.dungeon-page-loading,
+.dungeon-page-error,
+.boss-page-error {
+  text-align: center;
+  padding: 2rem;
+}
+
+.season-error h3,
+.dungeon-page-error h2,
+.boss-page-error h2 {
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--damage-mechanic);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--damage-mechanic);
+  border-radius: 0.375rem;
+  transition: all 0.2s;
+}
+
+.back-button:hover {
+  background-color: var(--damage-mechanic);
+  color: white;
+}
+
+/* Responsive design for iPad and desktop */
+@media (min-width: 768px) {
+  #root {
+    max-width: none;
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dungeon-page,
+  .home-page {
+    padding: 1rem;
+  }
+
+  .dungeon-title h1 {
+    font-size: 2rem;
+  }
+
+  .dungeon-metadata {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .boss-encounters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+}

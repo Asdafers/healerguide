@@ -1,0 +1,285 @@
+.boss-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header */
+.boss-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.boss-title h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.boss-order {
+  background-color: var(--damage-mechanic);
+  color: white;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.boss-stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ability-count {
+  color: #6b7280;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Content Layout */
+.boss-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Healer Information */
+.healer-info-section h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.info-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.info-card h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-card h3::before {
+  content: '⚕️';
+  font-size: 1.25rem;
+}
+
+.info-card p {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* Abilities Section */
+.abilities-section h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.abilities-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+/* Damage Profile Filters */
+.damage-profile-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-button {
+  padding: 0.5rem 1rem;
+  border: 2px solid #e5e7eb;
+  background: white;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.filter-button:hover:not(:disabled) {
+  background-color: #f9fafb;
+  transform: translateY(-1px);
+}
+
+.filter-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.filter-button.active {
+  color: white;
+  border-color: currentColor;
+}
+
+.filter-button.active:not(.damage-critical):not(.damage-high):not(.damage-moderate):not(.damage-mechanic) {
+  background-color: var(--damage-mechanic);
+  border-color: var(--damage-mechanic);
+}
+
+.filter-button.damage-critical.active {
+  background-color: var(--damage-critical);
+  border-color: var(--damage-critical);
+}
+
+.filter-button.damage-high.active {
+  background-color: var(--damage-high);
+  border-color: var(--damage-high);
+}
+
+.filter-button.damage-moderate.active {
+  background-color: var(--damage-moderate);
+  border-color: var(--damage-moderate);
+}
+
+.filter-button.damage-mechanic.active {
+  background-color: var(--damage-mechanic);
+  border-color: var(--damage-mechanic);
+}
+
+/* Abilities Grid */
+.abilities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.no-abilities {
+  text-align: center;
+  padding: 2rem;
+  color: #6b7280;
+}
+
+/* Loading and Error States */
+.boss-detail-loading,
+.boss-detail-error,
+.boss-detail-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.boss-detail-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.boss-detail-error h3,
+.boss-detail-empty h3 {
+  color: #ef4444;
+  margin-bottom: 1rem;
+}
+
+.retry-button {
+  background-color: var(--damage-mechanic);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retry-button:hover {
+  background-color: #1d4ed8;
+}
+
+.retry-button:focus {
+  outline: 2px solid var(--damage-mechanic);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .boss-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .abilities-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .damage-profile-filters {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .boss-detail-container {
+    padding: 1rem;
+  }
+
+  .boss-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .boss-title h1 {
+    font-size: 2rem;
+  }
+
+  .abilities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .damage-profile-filters {
+    gap: 0.25rem;
+  }
+
+  .filter-button {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .info-card {
+    padding: 1rem;
+  }
+
+  .boss-title h1 {
+    font-size: 1.75rem;
+  }
+
+  .damage-profile-filters {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .filter-button {
+    justify-content: center;
+  }
+}
