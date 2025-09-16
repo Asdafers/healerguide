@@ -59,14 +59,14 @@ sed "/\/\* End PBXBuildFile section \*\//i\\
 
 # Step 2: Add PBXFileReference entries
 print_status "Adding PBXFileReference entries..."
-sed -i "/\/\* End PBXFileReference section \*\//i\\
+sed "/\/\* End PBXFileReference section \*\//i\\
 \\t\\t$DUNGEON_TESTS_FILEREF /* DungeonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonTests.swift; sourceTree = \"<group>\"; };\\
 \\t\\t$BOSS_TESTS_FILEREF /* BossEncounterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossEncounterTests.swift; sourceTree = \"<group>\"; };\\
-\\t\\t$SEASON_TESTS_FILEREF /* SeasonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTests.swift; sourceTree = \"<group>\"; };" "$TEMP_FILE"
+\\t\\t$SEASON_TESTS_FILEREF /* SeasonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTests.swift; sourceTree = \"<group>\"; };" "$TEMP_FILE" > "${TEMP_FILE}.tmp" && mv "${TEMP_FILE}.tmp" "$TEMP_FILE"
 
 # Step 3: Add files to DungeonKitTests Sources build phase (1A001051)
 print_status "Adding files to DungeonKitTests Sources build phase..."
-sed -i "/1A001051 \/\* Sources \*\/ = {/,/files = (/c\\
+sed "/1A001051 \/\* Sources \*\/ = {/,/files = (/c\\
 \\t\\t1A001051 /* Sources */ = {\\
 \\t\\t\\tisa = PBXSourcesBuildPhase;\\
 \\t\\t\\tbuildActionMask = 2147483647;\\
@@ -75,7 +75,7 @@ sed -i "/1A001051 \/\* Sources \*\/ = {/,/files = (/c\\
 \\t\\t\\t\\t1A001094 /* IntegrationTests.swift in Sources */,\\
 \\t\\t\\t\\t$DUNGEON_TESTS_BUILDFILE /* DungeonTests.swift in Sources */,\\
 \\t\\t\\t\\t$BOSS_TESTS_BUILDFILE /* BossEncounterTests.swift in Sources */,\\
-\\t\\t\\t\\t$SEASON_TESTS_BUILDFILE /* SeasonTests.swift in Sources */," "$TEMP_FILE"
+\\t\\t\\t\\t$SEASON_TESTS_BUILDFILE /* SeasonTests.swift in Sources */," "$TEMP_FILE" > "${TEMP_FILE}.tmp" && mv "${TEMP_FILE}.tmp" "$TEMP_FILE"
 
 # Step 4: Create ModelTests group and add files to DungeonKitTests group
 print_status "Adding files to project groups..."
@@ -84,7 +84,7 @@ print_status "Adding files to project groups..."
 MODELTESTS_GROUP="DD${TIMESTAMP}100"
 
 # Add ModelTests group to PBXGroup section
-sed -i "/\/\* End PBXGroup section \*\//i\\
+sed "/\/\* End PBXGroup section \*\//i\\
 \\t\\t$MODELTESTS_GROUP /* ModelTests */ = {\\
 \\t\\t\\tisa = PBXGroup;\\
 \\t\\t\\tchildren = (\\
@@ -94,15 +94,15 @@ sed -i "/\/\* End PBXGroup section \*\//i\\
 \\t\\t\\t);\\
 \\t\\t\\tpath = ModelTests;\\
 \\t\\t\\tsourceTree = \"<group>\";\\
-\\t\\t};" "$TEMP_FILE"
+\\t\\t};" "$TEMP_FILE" > "${TEMP_FILE}.tmp" && mv "${TEMP_FILE}.tmp" "$TEMP_FILE"
 
 # Add ModelTests group to DungeonKitTests group (find and modify existing DungeonKitTests group)
-sed -i "/1A001056 \/\* DungeonKitTests \*\/ = {/,/children = (/c\\
+sed "/1A001056 \/\* DungeonKitTests \*\/ = {/,/children = (/c\\
 \\t\\t1A001056 /* DungeonKitTests */ = {\\
 \\t\\t\\tisa = PBXGroup;\\
 \\t\\t\\tchildren = (\\
 \\t\\t\\t\\t1A001057 /* DungeonKitTests.swift */,\\
-\\t\\t\\t\\t$MODELTESTS_GROUP /* ModelTests */," "$TEMP_FILE"
+\\t\\t\\t\\t$MODELTESTS_GROUP /* ModelTests */," "$TEMP_FILE" > "${TEMP_FILE}.tmp" && mv "${TEMP_FILE}.tmp" "$TEMP_FILE"
 
 # Copy the modified file back
 cp "$TEMP_FILE" "$PROJECT_FILE"
