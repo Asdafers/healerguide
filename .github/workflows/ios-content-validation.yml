@@ -1,0 +1,150 @@
+name: iOS Content Validation Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'ios/**'
+      - '.github/workflows/ios-content-validation.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'ios/**'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  content-validation-tests:
+    name: Content Validation Tests
+    runs-on: macos-14
+    timeout-minutes: 30
+
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_15.2.app/Contents/Developer
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '15.2'
+
+    - name: Cache SPM Dependencies
+      uses: actions/cache@v3
+      with:
+        path: ios/.build
+        key: ${{ runner.os }}-spm-${{ hashFiles('ios/**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
+
+    - name: List Available Schemes
+      working-directory: ios
+      run: |
+        xcodebuild -list -project HealerKit.xcodeproj
+
+    - name: Build DungeonKit Framework
+      working-directory: ios
+      run: |
+        xcodebuild build \
+          -project HealerKit.xcodeproj \
+          -scheme DungeonKit \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
+          -configuration Debug \
+          CODE_SIGNING_ALLOWED=NO
+
+    - name: Run Content Validation Tests
+      working-directory: ios
+      run: |
+        xcodebuild test \
+          -project HealerKit.xcodeproj \
+          -scheme DungeonKit \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
+          -only-testing:DungeonKitTests/DungeonContentValidationTests \
+          -only-testing:DungeonKitTests/BossEncounterContentValidationTests \
+          -only-testing:DungeonKitTests/DataIntegrityValidationTests \
+          -configuration Debug \
+          CODE_SIGNING_ALLOWED=NO \
+          -resultBundlePath TestResults.xcresult
+
+    - name: Parse Test Results
+      if: always()
+      working-directory: ios
+      run: |
+        if [ -d "TestResults.xcresult" ]; then
+          xcrun xcresulttool get --format json --path TestResults.xcresult > test_results.json
+
+          # Extract key metrics
+          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+
+          # Count passed/failed tests
+          PASSED=$(xcrun xcresulttool get --format json --path TestResults.xcresult | jq '.actions[0].actionResult.testsRef.summaries.testSummaryGroup.subtests[0].subtests | map(select(.subtestSummary.testStatus == "Success")) | length' 2>/dev/null || echo "N/A")
+          FAILED=$(xcrun xcresulttool get --format json --path TestResults.xcresult | jq '.actions[0].actionResult.testsRef.summaries.testSummaryGroup.subtests[0].subtests | map(select(.subtestSummary.testStatus == "Failure")) | length' 2>/dev/null || echo "N/A")
+
+          echo "- ✅ Passed: $PASSED tests" >> $GITHUB_STEP_SUMMARY
+          echo "- ❌ Failed: $FAILED tests" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "No test results found" >> $GITHUB_STEP_SUMMARY
+        fi
+
+    - name: Upload Test Results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-test-results
+        path: |
+          ios/TestResults.xcresult
+          ios/test_results.json
+        retention-days: 30
+
+    - name: Upload Build Logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-logs
+        path: |
+          ~/Library/Developer/Xcode/DerivedData/**/Logs/Build/*.xcactivitylog
+        retention-days: 7
+
+  validate-test-coverage:
+    name: Validate Test Coverage
+    runs-on: macos-14
+    needs: content-validation-tests
+    if: always()
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Download Test Results
+      uses: actions/download-artifact@v4
+      with:
+        name: ios-test-results
+        path: test-results
+
+    - name: Generate Coverage Report
+      run: |
+        echo "## Test Coverage Analysis" >> $GITHUB_STEP_SUMMARY
+
+        # Count test files and methods
+        CONTENT_TESTS=$(find ios/DungeonKitTests/ContentValidationTests -name "*.swift" | wc -l)
+        TEST_METHODS=$(grep -r "func test" ios/DungeonKitTests/ContentValidationTests --include="*.swift" | wc -l)
+
+        echo "- 📁 Content validation test files: $CONTENT_TESTS" >> $GITHUB_STEP_SUMMARY
+        echo "- 🧪 Total test methods: $TEST_METHODS" >> $GITHUB_STEP_SUMMARY
+
+        # Validate we have all expected test files
+        EXPECTED_FILES=("DungeonContentValidationTests.swift" "BossEncounterContentValidationTests.swift" "DataIntegrityValidationTests.swift")
+        MISSING_FILES=""
+
+        for file in "${EXPECTED_FILES[@]}"; do
+          if [ ! -f "ios/DungeonKitTests/ContentValidationTests/$file" ]; then
+            MISSING_FILES="$MISSING_FILES $file"
+          fi
+        done
+
+        if [ -n "$MISSING_FILES" ]; then
+          echo "- ⚠️ Missing test files:$MISSING_FILES" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- ✅ All expected test files present" >> $GITHUB_STEP_SUMMARY
+        fi
