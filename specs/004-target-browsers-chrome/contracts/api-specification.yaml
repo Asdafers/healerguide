@@ -1,0 +1,420 @@
+openapi: 3.0.3
+info:
+  title: HealerKit Shared Data Store API
+  description: RESTful API for Chrome web app and iPad app data synchronization
+  version: 1.0.0
+  contact:
+    name: HealerKit Development Team
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Development server
+  - url: https://healerkit.internal/api/v1
+    description: Production self-hosted server
+
+paths:
+  # Seasons endpoints
+  /seasons:
+    get:
+      summary: List all seasons
+      tags: [Seasons]
+      parameters:
+        - name: active_only
+          in: query
+          schema:
+            type: boolean
+            default: false
+          description: Return only active season
+      responses:
+        '200':
+          description: List of seasons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SeasonResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /seasons/{seasonId}:
+    get:
+      summary: Get season by ID
+      tags: [Seasons]
+      parameters:
+        - $ref: '#/components/parameters/SeasonId'
+      responses:
+        '200':
+          description: Season details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeasonResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  # Dungeons endpoints
+  /seasons/{seasonId}/dungeons:
+    get:
+      summary: List dungeons in a season
+      tags: [Dungeons]
+      parameters:
+        - $ref: '#/components/parameters/SeasonId'
+      responses:
+        '200':
+          description: List of dungeons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DungeonResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /dungeons/{dungeonId}:
+    get:
+      summary: Get dungeon by ID
+      tags: [Dungeons]
+      parameters:
+        - $ref: '#/components/parameters/DungeonId'
+      responses:
+        '200':
+          description: Dungeon details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DungeonResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  # Boss encounters endpoints
+  /dungeons/{dungeonId}/bosses:
+    get:
+      summary: List boss encounters in a dungeon
+      tags: [BossEncounters]
+      parameters:
+        - $ref: '#/components/parameters/DungeonId'
+      responses:
+        '200':
+          description: List of boss encounters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BossEncounterResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /bosses/{bossId}:
+    get:
+      summary: Get boss encounter by ID
+      tags: [BossEncounters]
+      parameters:
+        - $ref: '#/components/parameters/BossId'
+      responses:
+        '200':
+          description: Boss encounter details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BossEncounterResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  # Abilities endpoints
+  /bosses/{bossId}/abilities:
+    get:
+      summary: List abilities for a boss encounter
+      tags: [Abilities]
+      parameters:
+        - $ref: '#/components/parameters/BossId'
+        - name: damage_profile
+          in: query
+          schema:
+            $ref: '#/components/schemas/DamageProfile'
+          description: Filter by damage profile
+      responses:
+        '200':
+          description: List of abilities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AbilityResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /abilities/{abilityId}:
+    get:
+      summary: Get ability by ID
+      tags: [Abilities]
+      parameters:
+        - $ref: '#/components/parameters/AbilityId'
+      responses:
+        '200':
+          description: Ability details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbilityResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  # Health check
+  /health:
+    get:
+      summary: Health check endpoint
+      tags: [System]
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
+                  timestamp:
+                    type: string
+                    format: date-time
+                  database:
+                    type: string
+                    example: "connected"
+
+components:
+  parameters:
+    SeasonId:
+      name: seasonId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: Season UUID
+
+    DungeonId:
+      name: dungeonId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: Dungeon UUID
+
+    BossId:
+      name: bossId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: Boss encounter UUID
+
+    AbilityId:
+      name: abilityId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: Ability UUID
+
+  schemas:
+    DamageProfile:
+      type: string
+      enum: [Critical, High, Moderate, Mechanic]
+      description: Color-coded damage classification
+
+    SeasonResponse:
+      type: object
+      required: [id, majorVersion, name, isActive, dungeonCount]
+      properties:
+        id:
+          type: string
+          format: uuid
+        majorVersion:
+          type: string
+          pattern: '^\d+\.\d+$'
+          example: "11.0"
+        name:
+          type: string
+          example: "The War Within Season 1"
+        isActive:
+          type: boolean
+          example: true
+        dungeonCount:
+          type: integer
+          minimum: 0
+          example: 8
+
+    DungeonResponse:
+      type: object
+      required: [id, name, shortName, estimatedDuration, difficultyRating, bossCount]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: "Ara-Kara, City of Echoes"
+        shortName:
+          type: string
+          maxLength: 20
+          example: "Ara-Kara"
+        healerNotes:
+          type: string
+          maxLength: 500
+          example: "Focus on spread positioning for echoing abilities"
+        estimatedDuration:
+          type: integer
+          minimum: 15
+          maximum: 60
+          example: 35
+        difficultyRating:
+          type: integer
+          minimum: 1
+          maximum: 5
+          example: 3
+        bossCount:
+          type: integer
+          minimum: 1
+          example: 3
+
+    BossEncounterResponse:
+      type: object
+      required: [id, name, orderIndex, abilityCount]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: "Avanoxx"
+        healingSummary:
+          type: string
+          maxLength: 300
+          example: "Heavy raid damage during web phases, requires cooldowns"
+        positioning:
+          type: string
+          maxLength: 200
+          example: "Stay spread for web mechanics, center for adds"
+        cooldownPriority:
+          type: string
+          maxLength: 200
+          example: "Save major cooldowns for Alerting Shrill phases"
+        orderIndex:
+          type: integer
+          minimum: 1
+          example: 1
+        abilityCount:
+          type: integer
+          minimum: 0
+          example: 5
+
+    AbilityResponse:
+      type: object
+      required: [id, name, damageProfile, castTime, cooldown, isChanneled, affectedTargets]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: "Alerting Shrill"
+        description:
+          type: string
+          example: "Piercing scream that damages all players"
+        damageProfile:
+          $ref: '#/components/schemas/DamageProfile'
+        healerAction:
+          type: string
+          maxLength: 200
+          example: "Use major healing cooldown, prepare for heavy damage"
+        castTime:
+          type: integer
+          minimum: 0
+          example: 3
+        cooldown:
+          type: integer
+          minimum: 0
+          example: 45
+        isChanneled:
+          type: boolean
+          example: false
+        affectedTargets:
+          type: integer
+          minimum: 1
+          maximum: 40
+          example: 5
+
+    ErrorResponse:
+      type: object
+      required: [error, message]
+      properties:
+        error:
+          type: string
+          example: "not_found"
+        message:
+          type: string
+          example: "Season not found"
+        details:
+          type: object
+          additionalProperties: true
+
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "not_found"
+            message: "The requested resource was not found"
+
+    ServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "internal_error"
+            message: "An internal server error occurred"
+
+  securitySchemes:
+    # Future: Add authentication if needed for self-hosted deployment
+    # bearerAuth:
+    #   type: http
+    #   scheme: bearer
+
+tags:
+  - name: Seasons
+    description: WoW seasons and patch versions
+  - name: Dungeons
+    description: Mythic+ dungeons
+  - name: BossEncounters
+    description: Boss fights within dungeons
+  - name: Abilities
+    description: Individual boss abilities
+  - name: System
+    description: System health and status

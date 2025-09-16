@@ -1,0 +1,54 @@
+services:
+  database:
+    image: postgres:14
+    container_name: healerkit-postgres
+    environment:
+      POSTGRES_DB: healerkit
+      POSTGRES_USER: healer
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/Scripts/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./backend/Scripts/seed-data.sql:/docker-entrypoint-initdb.d/02-seed-data.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U healer -d healerkit"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: healerkit-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DATABASE_HOST: database
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: healer
+      DATABASE_PASSWORD: mysecretpassword
+      DATABASE_NAME: healerkit
+    volumes:
+      - ./backend:/app
+    command: ["swift", "run", "App", "serve", "--env", "development", "--hostname", "0.0.0.0", "--port", "8080"]
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: healerkit-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html:ro
+
+volumes:
+  postgres_data:
