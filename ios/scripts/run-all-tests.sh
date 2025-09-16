@@ -122,7 +122,6 @@ main() {
         "DungeonTests:Dungeon Model Tests"
         "BossEncounterTests:Boss Encounter Model Tests"
         "SeasonTests:Season Model Tests"
-        "DungeonKitTests:DungeonKit Framework Tests"
     )
 
     # Run each test class

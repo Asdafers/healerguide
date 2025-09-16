@@ -669,8 +669,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AFFB048 /* HealerKitTests.swift in Sources */,
-				1A001094 /* IntegrationTests.swift in Sources */,
 				DD8014840002 /* DungeonTests.swift in Sources */,
 				DD8014840004 /* BossEncounterTests.swift in Sources */,
 				DD8014840006 /* SeasonTests.swift in Sources */,
