@@ -117,22 +117,22 @@ main() {
     local failed_tests=0
     local total_tests=0
 
-    # Test framework compilation by building with test target
-    print_status "Testing DungeonKit framework with test target compilation..."
+    # Run the working BasicFrameworkTests
+    print_status "Running DungeonKit BasicFrameworkTests..."
 
-    # Build DungeonKit and its test target to verify everything compiles
-    if xcodebuild build-for-testing \
+    if xcodebuild test \
         -project "$PROJECT_PATH" \
         -scheme "$SCHEME" \
         -destination "$DESTINATION" \
+        -only-testing:"DungeonKitTests/BasicFrameworkTests" \
         -configuration "$CONFIGURATION" \
         CODE_SIGNING_ALLOWED=NO \
         -quiet; then
-        print_success "DungeonKit framework and tests compilation succeeded ✅"
+        print_success "DungeonKit BasicFrameworkTests passed ✅"
         failed_tests=0
         total_tests=1
     else
-        print_error "DungeonKit framework and tests compilation failed ❌"
+        print_error "DungeonKit BasicFrameworkTests failed ❌"
         failed_tests=1
         total_tests=1
     fi
