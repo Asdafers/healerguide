@@ -8,7 +8,7 @@ set -euo pipefail
 # Configuration
 PROJECT_PATH="HealerKit.xcodeproj"
 SCHEME="DungeonKit"
-DESTINATION="platform=iOS Simulator,name=iPhone 15,OS=17.2"
+DESTINATION="platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation),OS=17.2"
 CONFIGURATION="Debug"
 
 # Colors for output
