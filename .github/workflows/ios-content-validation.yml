@@ -43,10 +43,17 @@ jobs:
       run: |
         xcodebuild -list -project HealerKit.xcodeproj
 
+    - name: Fix DungeonKitTests Target
+      working-directory: ios
+      run: |
+        # Run our fix script to ensure test files are properly added to the Xcode project
+        ./scripts/fix-dungeonkit-tests.sh
+
     - name: Build DungeonKit Framework
       working-directory: ios
       run: |
-        xcodebuild build \
+        # Clean build after project modifications
+        xcodebuild clean build \
           -project HealerKit.xcodeproj \
           -scheme DungeonKit \
           -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation),OS=17.2' \
