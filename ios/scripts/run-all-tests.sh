@@ -117,7 +117,7 @@ main() {
     local failed_tests=0
     local total_tests=0
 
-    # Run the working BasicFrameworkTests
+    # Run the working BasicFrameworkTests with result bundle
     print_status "Running DungeonKit BasicFrameworkTests..."
 
     if xcodebuild test \
@@ -126,6 +126,7 @@ main() {
         -destination "$DESTINATION" \
         -only-testing:"DungeonKitTests/BasicFrameworkTests" \
         -configuration "$CONFIGURATION" \
+        -resultBundlePath TestResults.xcresult \
         CODE_SIGNING_ALLOWED=NO \
         -quiet; then
         print_success "DungeonKit BasicFrameworkTests passed ✅"
