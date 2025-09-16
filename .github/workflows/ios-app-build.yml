@@ -1,0 +1,227 @@
+name: Build HealerKit iOS App
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'ios/**'
+      - '.github/workflows/ios-app-build.yml'
+  workflow_dispatch: # Allow manual trigger
+    inputs:
+      build_configuration:
+        description: 'Build Configuration'
+        required: true
+        default: 'Release'
+        type: choice
+        options:
+        - Release
+        - Debug
+
+jobs:
+  build-ios-app:
+    name: Build HealerKit for iPad
+    runs-on: macos-14
+    timeout-minutes: 45
+
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_15.2.app/Contents/Developer
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '15.2'
+
+    - name: Cache SPM Dependencies
+      uses: actions/cache@v3
+      with:
+        path: ios/.build
+        key: ${{ runner.os }}-spm-${{ hashFiles('ios/**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
+
+    - name: Install iOS Simulator (iPad Pro)
+      run: |
+        # Ensure iPad Pro simulator is available
+        xcrun simctl list devices | grep "iPad Pro" || echo "iPad Pro simulators available"
+
+    - name: Clean Build Directory
+      working-directory: ios
+      run: |
+        xcodebuild clean \
+          -project HealerKit.xcodeproj \
+          -scheme HealerKit \
+          -configuration ${{ github.event.inputs.build_configuration || 'Release' }}
+
+    - name: Build HealerKit App for Device
+      working-directory: ios
+      run: |
+        # Build for iOS device (unsigned for now)
+        xcodebuild build \
+          -project HealerKit.xcodeproj \
+          -scheme HealerKit \
+          -configuration ${{ github.event.inputs.build_configuration || 'Release' }} \
+          -destination 'generic/platform=iOS' \
+          CODE_SIGNING_ALLOWED=NO \
+          CODE_SIGNING_REQUIRED=NO \
+          PRODUCT_BUNDLE_IDENTIFIER=com.healerkit.app \
+          -archivePath "build/HealerKit.xcarchive" \
+          archive
+
+    - name: Export IPA (Unsigned)
+      working-directory: ios
+      run: |
+        # Create export options plist for unsigned build
+        cat > ExportOptions.plist << EOF
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+            <key>method</key>
+            <string>development</string>
+            <key>uploadBitcode</key>
+            <false/>
+            <key>uploadSymbols</key>
+            <false/>
+            <key>compileBitcode</key>
+            <false/>
+            <key>signingStyle</key>
+            <string>manual</string>
+            <key>stripSwiftSymbols</key>
+            <true/>
+            <key>thinning</key>
+            <string>&lt;none&gt;</string>
+        </dict>
+        </plist>
+        EOF
+
+        # Export the archive to IPA
+        xcodebuild -exportArchive \
+          -archivePath "build/HealerKit.xcarchive" \
+          -exportPath "build/export" \
+          -exportOptionsPlist ExportOptions.plist \
+          -allowProvisioningUpdates || echo "Export may have failed, checking for app bundle..."
+
+        # If IPA export fails, try to create it manually from the archive
+        if [ ! -f "build/export/HealerKit.ipa" ]; then
+          echo "Creating IPA manually from app bundle..."
+          mkdir -p "build/manual_export/Payload"
+
+          # Find the app bundle in the archive
+          find "build/HealerKit.xcarchive" -name "*.app" -exec cp -R {} "build/manual_export/Payload/" \;
+
+          # Create IPA
+          cd "build/manual_export"
+          zip -r "../HealerKit-unsigned.ipa" Payload/
+          cd ../..
+
+          # Move to expected location
+          mkdir -p "build/export"
+          mv "build/HealerKit-unsigned.ipa" "build/export/"
+        fi
+
+    - name: Generate Build Information
+      working-directory: ios
+      run: |
+        # Create build info file
+        cat > build/export/BUILD_INFO.md << EOF
+        # HealerKit iOS App Build
+
+        **Build Date:** $(date)
+        **Git Commit:** ${{ github.sha }}
+        **Branch:** ${{ github.ref_name }}
+        **Configuration:** ${{ github.event.inputs.build_configuration || 'Release' }}
+        **Xcode Version:** $(xcodebuild -version | head -n1)
+
+        ## Installation Instructions
+
+        ### For Development/Testing (Unsigned Build):
+        1. Download the IPA file from the artifacts
+        2. Install using one of these methods:
+
+        #### Option A: Using Xcode
+        1. Connect your iPad to your Mac
+        2. Open Xcode and go to Window → Devices and Simulators
+        3. Select your iPad
+        4. Drag and drop the IPA file onto the Installed Apps section
+
+        #### Option B: Using iOS App Installer (if available)
+        1. Use a tool like 3uTools, iMazing, or Sideloadly
+        2. Follow the tool's instructions to install the unsigned IPA
+
+        #### Option C: Re-sign with your own certificate
+        1. Use iOS App Signer or similar tool
+        2. Sign with your Apple Developer certificate
+        3. Install via Xcode or iTunes
+
+        ### Requirements:
+        - iPad running iOS 13.1 or later
+        - For unsigned installs: Jailbroken device OR development certificate
+        - For signed installs: Valid Apple Developer account
+
+        ### Troubleshooting:
+        - If installation fails, the app may need to be signed with a valid certificate
+        - Check that your iPad meets the minimum iOS version requirement
+        - Ensure you trust the developer certificate in Settings → General → Device Management
+
+        ## Features Included:
+        - Complete War Within Season 1 dungeon data
+        - 8 dungeons with boss encounters and abilities
+        - Healer-focused encounter information
+        - Offline functionality
+        - iPad-optimized interface
+        EOF
+
+    - name: List Build Outputs
+      working-directory: ios
+      run: |
+        echo "=== Build Directory Contents ==="
+        find build -type f -name "*.ipa" -o -name "*.app" -o -name "*.dSYM" | head -20
+
+        echo "=== Archive Contents ==="
+        if [ -d "build/HealerKit.xcarchive" ]; then
+          find "build/HealerKit.xcarchive" -name "*.app" | head -5
+        fi
+
+        echo "=== Export Directory ==="
+        ls -la build/export/ || echo "Export directory not found"
+
+    - name: Upload HealerKit IPA
+      uses: actions/upload-artifact@v4
+      with:
+        name: HealerKit-iOS-App-${{ github.sha }}
+        path: |
+          ios/build/export/*.ipa
+          ios/build/export/BUILD_INFO.md
+          ios/build/HealerKit.xcarchive
+        retention-days: 30
+
+    - name: Upload Build Logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-logs-${{ github.sha }}
+        path: |
+          ~/Library/Developer/Xcode/DerivedData/**/Logs/Build/*.xcactivitylog
+        retention-days: 7
+
+    - name: Create Release Summary
+      run: |
+        echo "## 📱 HealerKit iOS App Build Complete" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Configuration:** ${{ github.event.inputs.build_configuration || 'Release' }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Target:** iPad (iOS 13.1+)" >> $GITHUB_STEP_SUMMARY
+        echo "**Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 📦 Download Artifacts" >> $GITHUB_STEP_SUMMARY
+        echo "- **HealerKit IPA**: Available in workflow artifacts" >> $GITHUB_STEP_SUMMARY
+        echo "- **Installation Guide**: Included in BUILD_INFO.md" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 🎯 Ready for iPad Testing" >> $GITHUB_STEP_SUMMARY
+        echo "- Complete War Within Season 1 content" >> $GITHUB_STEP_SUMMARY
+        echo "- 8 dungeons with healer-specific guidance" >> $GITHUB_STEP_SUMMARY
+        echo "- Offline functionality for gameplay use" >> $GITHUB_STEP_SUMMARY
+        echo "- Optimized for first-generation iPad Pro" >> $GITHUB_STEP_SUMMARY

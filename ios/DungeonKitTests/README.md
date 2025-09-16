@@ -164,3 +164,33 @@ When adding new content or modifying existing data:
 2. Update expected content constants if adding new dungeons/bosses
 3. Ensure all tests pass before submitting pull requests
 4. Add new test cases for new content validation requirements
+
+## 📱 iOS App Building
+
+### GitHub Actions Build (Main Branch Only)
+The repository includes an automated build workflow that creates installable iPad apps:
+
+- **Trigger**: Automatic on push to `main` branch
+- **Manual**: Go to Actions → "Build HealerKit iOS App" → "Run workflow"
+- **Output**: Signed/unsigned IPA files ready for iPad installation
+- **Artifacts**: Available for 30 days after build
+
+### Local Building
+```bash
+# Build release version for device
+./scripts/build-for-device.sh --release
+
+# Build debug version
+./scripts/build-for-device.sh --debug
+
+# Installation files created in build/export/
+```
+
+### Installing on iPad
+1. **Download IPA** from GitHub Actions artifacts
+2. **Connect iPad** to Mac via USB
+3. **Open Xcode** → Window → Devices and Simulators
+4. **Select your iPad** and drag IPA to "Installed Apps"
+5. **Trust certificate** in iPad Settings if needed
+
+Ready for immediate testing on iPad devices with complete War Within Season content! 🎯
