@@ -1,0 +1,41 @@
+# Ensure shell scripts always use LF line endings
+*.sh text eol=lf
+
+# Swift source files
+*.swift text diff=swift
+
+# Xcode project files
+*.pbxproj text merge=union
+*.xcconfig text
+*.xcscheme text
+*.xcworkspacedata text
+
+# Documentation
+*.md text
+*.txt text
+
+# Web files
+*.html text
+*.css text
+*.js text
+*.json text
+*.ts text
+*.tsx text
+
+# Configuration files
+*.yml text
+*.yaml text
+*.toml text
+*.ini text
+.gitignore text
+.gitattributes text
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
