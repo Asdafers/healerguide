@@ -90,8 +90,11 @@ main() {
     echo "======================================"
 
     # Check prerequisites
-    if [ ! -f "$PROJECT_PATH" ]; then
-        print_error "Xcode project not found. Run from ios directory."
+    if [ ! -d "$PROJECT_PATH" ]; then
+        print_error "Xcode project not found at $PROJECT_PATH. Run from ios directory."
+        print_status "Current directory: $(pwd)"
+        print_status "Available files:"
+        ls -la | head -10
         exit 1
     fi
 

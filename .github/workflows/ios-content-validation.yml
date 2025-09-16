@@ -56,6 +56,15 @@ jobs:
     - name: Run Available Tests
       working-directory: ios
       run: |
+        # Debug: Show current directory and contents
+        echo "Current directory: $(pwd)"
+        echo "Directory contents:"
+        ls -la
+
+        # Verify script exists and is executable
+        echo "Script details:"
+        ls -la scripts/run-all-tests.sh
+
         # Use our comprehensive test runner script
         ./scripts/run-all-tests.sh
 
